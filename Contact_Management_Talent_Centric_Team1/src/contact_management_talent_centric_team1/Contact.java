@@ -12,4 +12,5 @@ package contact_management_talent_centric_team1;
 public class Contact
 {
     
+    
 }
