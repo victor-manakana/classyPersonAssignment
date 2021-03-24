@@ -5,12 +5,14 @@
  */
 package contact_management_talent_centric_team1;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  *
  * @author SALMAN
  */
-
-
 public class Contact_Management_Talent_Centric_Team1
 {
 
@@ -30,15 +32,27 @@ public class Contact_Management_Talent_Centric_Team1
     static String OfficeNo;
     static String PersonalEmail;
     static String WorkEmail;
-            
+
+    static Scanner in;
     
+    static List<String> contacts = new ArrayList();
+    static String [] person = new String[12];
+
     public static void main(String[] args)
     {
         // TODO code application logic here
     }
-    
+
     public void ContactQuestions()
     {
-        
+        try
+        {
+            System.out.println("Please enter contact name");
+            FirstName = in.nextLine();
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 }
