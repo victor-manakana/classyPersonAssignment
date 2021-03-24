@@ -164,4 +164,13 @@ public class Contact_Management_Talent_Centric_Team1
         }
 
     }
+    
+    public static void contactsToArray()
+    {
+        for (int i = 0; i < person.length; i++)
+        {
+            
+        }
+        contacts.add(person);
+    }
 }
