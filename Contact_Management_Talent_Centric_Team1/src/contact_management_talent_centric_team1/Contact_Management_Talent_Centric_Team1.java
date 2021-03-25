@@ -5,6 +5,9 @@
  */
 package contact_management_talent_centric_team1;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,11 +45,25 @@ public class Contact_Management_Talent_Centric_Team1
 
     public static void main(String[] args)
     {
-//        System.out.println("Please enter contact name");
-//         FirstName = in.nextLine();
-//
-//        CreateContactQuestions();
+        readContacts();
+        ContactQuestions();
+//        for(int i=0;i<contacts.size();i++)
+//        {
+//            System.out.println("===============New Contact===================");
+//            String [] arr = contacts.get(i);
+//            for(int j=0;j<arr.length;j++)
+//            {
+//                System.out.println(arr[j]);
+//            } 
+//            System.out.println("==================================");
+//        }  
 
+//        person[0] = "a";
+//        person[1] = "b";
+//        person[2] = "c";
+//        person[3] = "d";
+//        person[4] = "e";
+//        writeToContacts(person);
     }
 
     public static void ContactQuestions()
@@ -59,10 +76,11 @@ public class Contact_Management_Talent_Centric_Team1
 
             do
             {
-                while (hasName);
-                for (String[] contact : contacts)
+               
+                for (int i = 0; i < contacts.size(); i++)
                 {
-                    if (FirstName.toLowerCase() != person[0].toLowerCase())
+                    String[] arrPerson = contacts.get(i);
+                    if (FirstName.toLowerCase() != arrPerson[0].toLowerCase())
                     {
                         hasName = true;
                         break;
@@ -78,7 +96,7 @@ public class Contact_Management_Talent_Centric_Team1
                     if (CreateNewContact.toLowerCase().contains("y"))
                     {
                         CreateContactQuestions();
-                        hasName= true;
+                        hasName = true;
                     }
                 }
                 else
@@ -113,12 +131,12 @@ public class Contact_Management_Talent_Centric_Team1
         matcher = patternNum.matcher(FirstName);
         while (!matcher.matches())
         {
-            System.err.println("Only alphabet valid for first name and name must have more than 3 charcaters.\n"+"Please re-enter first name.");
+            System.err.println("Only alphabet valid for first name and name must have more than 3 charcaters.\n" + "Please re-enter first name.");
             FirstName = in.nextLine();
             matcher = patternName.matcher(FirstName);
         }
         person[0] = FirstName;
-        
+
         System.out.println("\n Please enter remaining details for the contact \n");
 
         System.out.println("Please enter middle name");
@@ -130,13 +148,13 @@ public class Contact_Management_Talent_Centric_Team1
         matcher = patternName.matcher(LastName);
         while (!matcher.matches())
         {
-            System.err.println("Only alphabet valid for last name and name must have more than 3 charcaters.\n"+"Please re-enter last name.");
+            System.err.println("Only alphabet valid for last name and name must have more than 3 charcaters.\n" + "Please re-enter last name.");
             LastName = in.nextLine();
             matcher = patternName.matcher(LastName);
         }
         person[2] = LastName;
 
-        System.out.println("Please enter gender");
+        System.out.println("Please enter gender \n male,female or other");
         Gender = in.nextLine();
         person[3] = Gender;
 
@@ -166,7 +184,6 @@ public class Contact_Management_Talent_Centric_Team1
             matcher = patternNum.matcher(MobileNo);
         }
         person[8] = MobileNo;
-        
 
         System.out.println("Please enter home number");
         HomeNo = in.nextLine();
@@ -195,7 +212,7 @@ public class Contact_Management_Talent_Centric_Team1
         matcher = patternEmail.matcher(PersonalEmail);
         while (!matcher.matches())
         {
-            System.err.println("Please enter valid personal email"+"\n"+"eg:john78@gmail.com");
+            System.err.println("Please enter valid personal email" + "\n" + "eg:john78@gmail.com");
             PersonalEmail = in.nextLine();
             matcher = patternEmail.matcher(PersonalEmail);
         }
@@ -206,7 +223,7 @@ public class Contact_Management_Talent_Centric_Team1
         matcher = patternEmail.matcher(WorkEmail);
         while (!matcher.matches())
         {
-            System.err.println("Please enter valid work email"+"\n"+"eg:johntalentcentric01@gmail.com");
+            System.err.println("Please enter valid work email" + "\n" + "eg:johntalentcentric01@gmail.com");
             WorkEmail = in.nextLine();
             matcher = patternEmail.matcher(WorkEmail);
         }
@@ -214,7 +231,6 @@ public class Contact_Management_Talent_Centric_Team1
 
         contacts.add(person);
         //send person to be written to csv
-        
 
         for (int i = 0; i < person.length; i++)
         {
@@ -224,32 +240,54 @@ public class Contact_Management_Talent_Centric_Team1
             }
         }
 
+        writeToContacts(person);
+
     }
 
-    public static void contactsToArray(String FirstName, String MiddleName, String LastName,
-            String Gender, String DOB, String Country,
-            String City, String StreetAddress, String Mobile,
-            String Home, String Office, String PersonalEmail,
-            String WorkEmail)
+    public static void readContacts()
     {
-//        for (int i = 0; i < person.length; i++)
-//        {
-//            
-//        }
-        person[0] = FirstName;
-        person[1] = MiddleName;
-        person[2] = LastName;
-        person[3] = Gender;
-        person[4] = DOB;
-        person[5] = Country;
-        person[6] = City;
-        person[7] = StreetAddress;
-        person[8] = Mobile;
-        person[9] = Home;
-        person[10] = Office;
-        person[11] = PersonalEmail;
-        person[12] = WorkEmail;
+        try
+        {
+            File file = new File("Contacts.txt");
+            Scanner filesc = new Scanner(file);
 
-        contacts.add(person);
+            String[] details;
+            while (filesc.hasNextLine())
+            {
+                String currentLine = filesc.nextLine();
+                details = currentLine.split(",");
+
+                contacts.add(details);
+            }
+            filesc.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception:\n" + e);
+        }
+
     }
+
+    public static void writeToContacts(String[] arrPerson)
+    {
+        try
+        {
+            FileWriter write = new FileWriter(new File("Contacts.txt"), true);
+//            write.append("\n" + arrPerson[0]);
+//            write.append(arrPerson[0]);
+            String line = "\n" + arrPerson[0];
+            for (int i = 1; i < arrPerson.length; i++)
+            {
+//                write.append(","+arrPerson[i]);
+                line += "," + arrPerson[i];
+            }
+            write.append(line);
+            write.close();
+        }
+        catch (Exception e)
+        {
+        }
+
+    }
+
 }
