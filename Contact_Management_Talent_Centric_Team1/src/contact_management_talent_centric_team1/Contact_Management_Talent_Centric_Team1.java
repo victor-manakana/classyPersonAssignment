@@ -42,12 +42,13 @@ public class Contact_Management_Talent_Centric_Team1
 
     static List<String[]> contacts = new ArrayList();
     static String[] person = new String[13];
+    static String[] variables = {"FirstName : ","MiddleName : ","LastName : ","Gender : ","DOB : ","Country : ","City :","StreetAddress : ","Mobile number : ","Home number : ","Office number : ","PersonalEmail : ", "WorkEmail : "};
 
     public static void main(String[] args)
     {
         readContacts();
-         ContactQuestions();
-        //displayContact();
+         //ContactQuestions();
+        displayAllContacts();
         
 //        System.out.println("Please enter contact first name");
 //        FirstName = in.nextLine();
@@ -74,6 +75,7 @@ public class Contact_Management_Talent_Centric_Team1
             String[] arr = contacts.get(i);
             for (int j = 0; j < arr.length; j++)
             {
+                System.out.print(variables[j]);
                 System.out.println(arr[j]);
             }
             System.out.println("==================================");
