@@ -46,7 +46,7 @@ public class Contact_Management_Talent_Centric_Team1
 
     public static void main(String[] args)
     {
-        System.err.println("Do you want to view all contacts?(y/n");
+        System.out.println("Do you want to view all contacts?(y/n)");
         String viewAll = in.nextLine();
         readContacts();
         if(viewAll.toLowerCase().contains("y"))
@@ -99,19 +99,19 @@ public class Contact_Management_Talent_Centric_Team1
                     // System.out.println(arr[0]);
                     if (arr[0].toLowerCase().contains(FirstName.toLowerCase()))
                     {
-                        System.out.println("found");
+                        System.out.println("Found your contact");
                         hasName=true;
-                        System.err.println(hasName);
+                        
                         for(int j =0;j<arr.length;j++)
                         {
-                            System.err.println(arr[j]);
+                            System.out.println(variables[j]);
+                            System.out.println(arr[j]);
                             
                         }
                     }
 
                     // System.out.println("==================================");
                 }
-                System.err.println(hasName);
 
                 if (hasName == false)
                 {
