@@ -1,6 +1,7 @@
 package personApp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,20 +22,24 @@ public class PersonApp {
 	private String WorkEmail;
 
 	public static void main(String[] args) {
-	//prompt user to input the name they are looking for 
-	Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    //Prompt user to input name to search
+	Scanner myObj = new Scanner(System.in);  
     System.out.println("Enter Name");
+    
+    //List of names available
+    ArrayList<String> arr = new ArrayList<String>();
+    
+    System.out.println("First element of the ArrayList: "+arr.get(0));
 
-    String Name = myObj.nextLine();  // Read user input
-    System.out.println("Available Names are: " + Name);  // Output user input
+    String Name = myObj.nextLine();  // Read user input 
     
-    
-   
-    ArrayList<String> NameList = new ArrayList<String>();
-    System.out.println("First element of the ArrayList: "+NameList.get(0));
-    
-    System.out.println(NameList);
-  } 
-	
-	}	
+    //ArrayList <String> arr = new ArrayList<String>();
+    System.out.println("Contacts Of Person are ");
+    for (String element : arr){
+       if (element.contains("Name")){
+             System.out.println(element);
+       }// Output user input
+    }
+	}
+}
  
