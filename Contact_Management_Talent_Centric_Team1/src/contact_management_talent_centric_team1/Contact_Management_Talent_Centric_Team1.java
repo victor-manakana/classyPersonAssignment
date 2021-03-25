@@ -8,8 +8,7 @@ package contact_management_talent_centric_team1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import java.util.regex.*;
 
 /**
  *
@@ -34,7 +33,7 @@ public class Contact_Management_Talent_Centric_Team1
     static String OfficeNo;
     static String PersonalEmail;
     static String WorkEmail;
-    static int counter =0;
+    static int counter = 0;
 
     static Scanner in = new Scanner(System.in);
 
@@ -45,6 +44,7 @@ public class Contact_Management_Talent_Centric_Team1
     {
 //        System.out.println("Please enter contact name");
 //         FirstName = in.nextLine();
+//
 //        CreateContactQuestions();
 
     }
@@ -78,21 +78,21 @@ public class Contact_Management_Talent_Centric_Team1
                     if (CreateNewContact.toLowerCase().contains("y"))
                     {
                         CreateContactQuestions();
+                        hasName= true;
                     }
                 }
                 else
                 {
                     counter++;
-                    System.err.println(counter +"/3 tries remaining");
+                    System.err.println(counter + "/3 tries remaining");
                     System.out.println("Please re-enter contact first name");
                     FirstName = in.nextLine();
                 }
 
-            }while(hasName != true && counter <3 );
-            
+            }
+            while (hasName != true && counter < 3);
+
             //display();
-            
-        
         }
         catch (Exception e)
         {
@@ -102,8 +102,24 @@ public class Contact_Management_Talent_Centric_Team1
 
     public static void CreateContactQuestions()
     {
-        System.out.println("Please enter the following details for the contact");
+        String regexEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regexNum = "^[0-9]{10}$";
+        String regexName = "^[A-Za-z]{3,25}$";
+        Pattern patternEmail = Pattern.compile(regexEmail);
+        Pattern patternNum = Pattern.compile(regexNum);
+        Pattern patternName = Pattern.compile(regexName);
+        Matcher matcher;
+
+        matcher = patternNum.matcher(FirstName);
+        while (!matcher.matches())
+        {
+            System.err.println("Only alphabet valid for first name and name must have more than 3 charcaters.\n"+"Please re-enter first name.");
+            FirstName = in.nextLine();
+            matcher = patternName.matcher(FirstName);
+        }
         person[0] = FirstName;
+        
+        System.out.println("\n Please enter remaining details for the contact \n");
 
         System.out.println("Please enter middle name");
         MiddelName = in.nextLine();
@@ -111,6 +127,13 @@ public class Contact_Management_Talent_Centric_Team1
 
         System.out.println("Please enter last name");
         LastName = in.nextLine();
+        matcher = patternName.matcher(LastName);
+        while (!matcher.matches())
+        {
+            System.err.println("Only alphabet valid for last name and name must have more than 3 charcaters.\n"+"Please re-enter last name.");
+            LastName = in.nextLine();
+            matcher = patternName.matcher(LastName);
+        }
         person[2] = LastName;
 
         System.out.println("Please enter gender");
@@ -135,42 +158,98 @@ public class Contact_Management_Talent_Centric_Team1
 
         System.out.println("Please enter mobile number");
         MobileNo = in.nextLine();
+        matcher = patternNum.matcher(MobileNo);
+        while (!matcher.matches())
+        {
+            System.err.println("Please enter valid mobile number");
+            MobileNo = in.nextLine();
+            matcher = patternNum.matcher(MobileNo);
+        }
         person[8] = MobileNo;
+        
 
         System.out.println("Please enter home number");
         HomeNo = in.nextLine();
+        matcher = patternNum.matcher(HomeNo);
+        while (!matcher.matches())
+        {
+            System.err.println("Please enter valid home number");
+            HomeNo = in.nextLine();
+            matcher = patternNum.matcher(HomeNo);
+        }
         person[9] = HomeNo;
 
         System.out.println("Please enter office number");
         OfficeNo = in.nextLine();
+        matcher = patternNum.matcher(MobileNo);
+        while (!matcher.matches())
+        {
+            System.err.println("Please enter valid office number");
+            OfficeNo = in.nextLine();
+            matcher = patternNum.matcher(MobileNo);
+        }
         person[10] = OfficeNo;
 
         System.out.println("Please enter the personal email");
         PersonalEmail = in.nextLine();
+        matcher = patternEmail.matcher(PersonalEmail);
+        while (!matcher.matches())
+        {
+            System.err.println("Please enter valid personal email"+"\n"+"eg:john78@gmail.com");
+            PersonalEmail = in.nextLine();
+            matcher = patternEmail.matcher(PersonalEmail);
+        }
         person[11] = PersonalEmail;
 
         System.out.println("Please enter the work email");
         WorkEmail = in.nextLine();
+        matcher = patternEmail.matcher(WorkEmail);
+        while (!matcher.matches())
+        {
+            System.err.println("Please enter valid work email"+"\n"+"eg:johntalentcentric01@gmail.com");
+            WorkEmail = in.nextLine();
+            matcher = patternEmail.matcher(WorkEmail);
+        }
         person[12] = WorkEmail;
 
         contacts.add(person);
+        //send person to be written to csv
+        
 
         for (int i = 0; i < person.length; i++)
         {
             if (person[i] == "")
             {
-                person[i] = "0";
+                person[i] = "N/a";
             }
         }
 
     }
-    
-    public static void contactsToArray()
+
+    public static void contactsToArray(String FirstName, String MiddleName, String LastName,
+            String Gender, String DOB, String Country,
+            String City, String StreetAddress, String Mobile,
+            String Home, String Office, String PersonalEmail,
+            String WorkEmail)
     {
-        for (int i = 0; i < person.length; i++)
-        {
-            
-        }
+//        for (int i = 0; i < person.length; i++)
+//        {
+//            
+//        }
+        person[0] = FirstName;
+        person[1] = MiddleName;
+        person[2] = LastName;
+        person[3] = Gender;
+        person[4] = DOB;
+        person[5] = Country;
+        person[6] = City;
+        person[7] = StreetAddress;
+        person[8] = Mobile;
+        person[9] = Home;
+        person[10] = Office;
+        person[11] = PersonalEmail;
+        person[12] = WorkEmail;
+
         contacts.add(person);
     }
 }
