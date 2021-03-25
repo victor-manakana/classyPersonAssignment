@@ -46,25 +46,21 @@ public class Contact_Management_Talent_Centric_Team1
 
     public static void main(String[] args)
     {
+        System.err.println("Do you want to view all contacts?(y/n");
+        String viewAll = in.nextLine();
         readContacts();
-         //ContactQuestions();
-        displayAllContacts();
+        if(viewAll.toLowerCase().contains("y"))
+        {
+            displayAllContacts();
+        }
+        else
+        {
+            ContactQuestions();
+        }
         
-//        System.out.println("Please enter contact first name");
-//        FirstName = in.nextLine();
-//        for (int i = 0; i < contacts.size(); i++)
-//        {
-//            //System.out.println("===============New Contact===================");
-//            String[] arr = contacts.get(i);
-//
-//            // System.out.println(arr[0]);
-//            if (arr[0].toLowerCase().contains(FirstName.toLowerCase()))
-//            {
-//                System.out.println("found");
-//            }
-//
-//            // System.out.println("==================================");
-//        }
+         
+        
+        
     }
 
     public static void displayAllContacts()
