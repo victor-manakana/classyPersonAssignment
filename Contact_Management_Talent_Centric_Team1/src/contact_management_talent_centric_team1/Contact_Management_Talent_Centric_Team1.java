@@ -46,24 +46,38 @@ public class Contact_Management_Talent_Centric_Team1
     public static void main(String[] args)
     {
         readContacts();
-        ContactQuestions();
-//        for(int i=0;i<contacts.size();i++)
+         ContactQuestions();
+        //displayContact();
+        
+//        System.out.println("Please enter contact first name");
+//        FirstName = in.nextLine();
+//        for (int i = 0; i < contacts.size(); i++)
 //        {
-//            System.out.println("===============New Contact===================");
-//            String [] arr = contacts.get(i);
-//            for(int j=0;j<arr.length;j++)
+//            //System.out.println("===============New Contact===================");
+//            String[] arr = contacts.get(i);
+//
+//            // System.out.println(arr[0]);
+//            if (arr[0].toLowerCase().contains(FirstName.toLowerCase()))
 //            {
-//                System.out.println(arr[j]);
-//            } 
-//            System.out.println("==================================");
-//        }  
+//                System.out.println("found");
+//            }
+//
+//            // System.out.println("==================================");
+//        }
+    }
 
-//        person[0] = "a";
-//        person[1] = "b";
-//        person[2] = "c";
-//        person[3] = "d";
-//        person[4] = "e";
-//        writeToContacts(person);
+    public static void displayAllContacts()
+    {
+        for (int i = 0; i < contacts.size(); i++)
+        {
+            System.out.println("===============Contact===================");
+            String[] arr = contacts.get(i);
+            for (int j = 0; j < arr.length; j++)
+            {
+                System.out.println(arr[j]);
+            }
+            System.out.println("==================================");
+        }
     }
 
     public static void ContactQuestions()
@@ -73,39 +87,53 @@ public class Contact_Management_Talent_Centric_Team1
             System.out.println("Please enter contact first name");
             FirstName = in.nextLine();
             boolean hasName = false;
+            
 
             do
             {
-               
+                System.err.println(hasName);
+
                 for (int i = 0; i < contacts.size(); i++)
                 {
-                    String[] arrPerson = contacts.get(i);
-                    if (FirstName.toLowerCase() != arrPerson[0].toLowerCase())
-                    {
-                        hasName = true;
-                        break;
+                    //System.out.println("===============New Contact===================");
+                    String[] arr = contacts.get(i);
 
+                    // System.out.println(arr[0]);
+                    if (arr[0].toLowerCase().contains(FirstName.toLowerCase()))
+                    {
+                        System.out.println("found");
+                        hasName=true;
+                        System.err.println(hasName);
+                        for(int j =0;j<arr.length;j++)
+                        {
+                            System.err.println(arr[j]);
+                            
+                        }
                     }
+
+                    // System.out.println("==================================");
                 }
+                System.err.println(hasName);
 
                 if (hasName == false)
                 {
                     System.out.println("Contact does not exist, do you want to create new contact ?(y/n)");
                     String CreateNewContact = in.nextLine();
 
-                    if (CreateNewContact.toLowerCase().contains("y"))
+                    if (CreateNewContact.toLowerCase() == "y")
                     {
                         CreateContactQuestions();
                         hasName = true;
                     }
+                    else
+                    {
+                        counter++;
+                        System.err.println(counter + "/3 tries remaining");
+                        System.out.println("Please re-enter contact first name");
+                        FirstName = in.nextLine();
+                    }
                 }
-                else
-                {
-                    counter++;
-                    System.err.println(counter + "/3 tries remaining");
-                    System.out.println("Please re-enter contact first name");
-                    FirstName = in.nextLine();
-                }
+                
 
             }
             while (hasName != true && counter < 3);
